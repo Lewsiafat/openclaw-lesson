@@ -26,125 +26,597 @@
         <p>為什麼選 OpenClaw？這堂課要做什麼？</p>
       </header>
 
+      <h3>OpenClaw 是什麼？</h3>
       <p>
-        OpenClaw 是一套基於 TypeScript / Node.js 的開源 AI Agent 框架，
-        支援超過 50 種平台整合（Telegram、WhatsApp、Discord 等），
-        並且原生支援 Windows — 不需要 WSL2 或 Docker。
+        <strong>OpenClaw</strong> 是一套用 TypeScript / Node.js 寫的開源 AI Agent 框架。
+        你可以把它想成「自己架一個 AI 助理」——不是用別人的平台，而是完全跑在你自己的電腦或伺服器上。
       </p>
+      <ul>
+        <li>支援超過 <strong>50 種平台整合</strong>（Telegram、WhatsApp、Discord、LINE…）</li>
+        <li><strong>原生支援 Windows</strong>，不需要 WSL2 或 Docker</li>
+        <li>開源、免費、可自行修改</li>
+        <li>透過 Skills 系統讓 agent 學會新能力</li>
+      </ul>
+
+      <h3>跟其他方案比較</h3>
+      <figure>
+        <table>
+          <thead>
+            <tr>
+              <th>方案</th>
+              <th>安裝難度</th>
+              <th>Windows 支援</th>
+              <th>平台整合</th>
+              <th>自訂性</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>OpenClaw</strong>（本課程）</td>
+              <td>⭐⭐ 中等</td>
+              <td>✅ 原生</td>
+              <td>50+ 平台</td>
+              <td>高</td>
+            </tr>
+            <tr>
+              <td>hermes-agent</td>
+              <td>⭐⭐⭐ 需要 Docker</td>
+              <td>⚠️ 需 Docker Desktop</td>
+              <td>少數平台</td>
+              <td>中</td>
+            </tr>
+            <tr>
+              <td>nanobot</td>
+              <td>⭐ 最簡單</td>
+              <td>✅ 輕量</td>
+              <td>精選平台</td>
+              <td>低</td>
+            </tr>
+            <tr>
+              <td>直接用 ChatGPT</td>
+              <td>✅ 零安裝</td>
+              <td>✅ 瀏覽器</td>
+              <td>僅網頁</td>
+              <td>無</td>
+            </tr>
+          </tbody>
+        </table>
+      </figure>
+
+      <h3>這堂課結束後你會有什麼</h3>
+      <ol>
+        <li>已安裝 Node.js 22+ 和 OpenClaw CLI 的 Windows 電腦</li>
+        <li>一組 AI API Key，可控制使用費用</li>
+        <li>已完成初始化的 OpenClaw agent</li>
+        <li>成功在終端機與 agent 對話</li>
+        <li>接通 Telegram bot，手機也能聊</li>
+      </ol>
+
+      <h3>課程路線圖</h3>
       <p>
-        這堂課會帶你在 60 分鐘內完成：安裝 Node.js → 安裝 OpenClaw CLI → 申請 API Key → 初始化設定 → 第一次對話 → 接通 Telegram。
+        Step 1 前置確認 →
+        Step 2 安裝 Node.js →
+        Step 3 安裝 OpenClaw →
+        Step 4 申請 API Key →
+        Step 5 初始化 →
+        Step 6 第一次對話 →
+        Step 7 接通 Telegram →
+        Step 8 驗收 →
+        Step 9 加碼
       </p>
 
-      <p>TODO: 與其他方案（hermes-agent / nanobot / ChatGPT）的比較表待補充。</p>
+      <p><em>準備好了嗎？點「下一步」開始。</em></p>
     </section>
 
     <!-- Step 1: 確認前置需求 -->
     <section class="step" data-step="1" hidden>
       <header>
         <h2>Step 1 / 9 &middot; 確認前置需求</h2>
-        <p>確保你的環境符合最低要求</p>
+        <p>確保你的環境符合最低要求，才能順利安裝</p>
       </header>
 
-      <p>TODO: 待撰寫 — Windows 11 版本確認、管理員權限、網路、Telegram 帳號檢查。</p>
+      <h3>需要準備的東西</h3>
+      <ul>
+        <li>✅ <strong>Windows 11</strong>（22H2 或更新）</li>
+        <li>✅ <strong>管理員權限</strong>（能安裝軟體）</li>
+        <li>✅ <strong>穩定網路</strong>（需下載約 100MB）</li>
+        <li>✅ <strong>瀏覽器</strong>（Chrome 或 Edge 皆可）</li>
+        <li>✅ <strong>Telegram 帳號</strong>（Step 7 會用到）</li>
+        <li>✅ <strong>信用卡或 PayPal</strong>（申請 API Key 時需要少量儲值，約 $5 美元）</li>
+      </ul>
 
+      <h3>確認 Windows 版本</h3>
+      <p>按 <kbd>Win + R</kbd>，輸入以下指令並按 Enter：</p>
       <pre data-copy><code>winver</code></pre>
+      <p>應該看到「Windows 11」以及版本號（22H2 或更新）。</p>
+
+      <h3>確認管理員權限</h3>
+      <p>在開始功能表搜尋「PowerShell」，對它按右鍵選擇<strong>「以系統管理員身分執行」</strong>。</p>
+      <p>如果有跳出 UAC 確認視窗（問你是否允許），代表你有管理員權限，可以繼續。</p>
+
+      <details>
+        <summary>遇到問題？</summary>
+        <ul>
+          <li><strong>看到「Windows 10」</strong>：本課程以 Windows 11 為主，部分截圖可能不同，但流程應相同。</li>
+          <li><strong>沒有管理員權限</strong>：請聯絡電腦管理員，或使用個人電腦。</li>
+          <li><strong>沒有 Telegram 帳號</strong>：現在就去手機下載 Telegram 並註冊，免費。</li>
+        </ul>
+      </details>
+
+      <p>一切都確認好了嗎？繼續！</p>
     </section>
 
     <!-- Step 2: 安裝 Node.js 22+ -->
     <section class="step" data-step="2" hidden>
       <header>
         <h2>Step 2 / 9 &middot; 安裝 Node.js 22+</h2>
-        <p>OpenClaw 需要 Node.js 22.14 以上</p>
+        <p>OpenClaw 需要 Node.js 22.14 以上才能執行</p>
       </header>
 
-      <p>TODO: 待撰寫 — nvm-windows 安裝路徑 + 官方安裝程式備案。</p>
+      <h3>方法一：官方安裝程式（推薦新手）</h3>
+      <ol>
+        <li>前往 <a href="https://nodejs.org/" target="_blank">https://nodejs.org/</a></li>
+        <li>點選左邊的 <strong>LTS（長期支援版）</strong>下載按鈕</li>
+        <li>執行下載的 <code>.msi</code> 安裝程式</li>
+        <li>全部選預設值，一直按「Next」，最後按「Install」</li>
+        <li>安裝完成後，<strong>重新開啟 PowerShell</strong>（這步很重要）</li>
+      </ol>
 
+      <h3>方法二：nvm-windows（推薦進階用戶）</h3>
+      <p>nvm-windows 讓你日後可以輕鬆切換 Node.js 版本。</p>
+      <ol>
+        <li>前往 <a href="https://github.com/coreybutler/nvm-windows/releases" target="_blank">nvm-windows 下載頁面</a></li>
+        <li>下載最新版的 <code>nvm-setup.exe</code></li>
+        <li>執行安裝程式，使用預設路徑</li>
+        <li>安裝完成後，以系統管理員開啟新的 PowerShell，輸入：</li>
+      </ol>
+      <pre data-copy><code>nvm install 22
+nvm use 22</code></pre>
+
+      <h3>驗證安裝成功</h3>
+      <p>不管用哪個方法，完成後在 PowerShell 輸入：</p>
       <pre data-copy><code>node --version
 npm --version</code></pre>
+      <p>應該看到類似這樣的輸出：</p>
+      <pre><code>v22.17.1
+10.9.2</code></pre>
+      <p>Node.js 版本必須是 <strong>v22 以上</strong>。</p>
+
+      <details>
+        <summary>遇到問題？</summary>
+        <ul>
+          <li>
+            <strong>node: command not found 或找不到指令</strong><br>
+            你可能忘記重新開啟 PowerShell。完全關掉舊視窗，再重新用管理員身分開啟新的 PowerShell。
+          </li>
+          <li>
+            <strong>防毒軟體阻擋安裝</strong><br>
+            暫時關閉 Windows Defender 即時保護（設定 → 隱私權與安全性 → Windows 安全性），安裝完再開回來。
+          </li>
+          <li>
+            <strong>版本顯示 v18 或更舊</strong><br>
+            如果系統已有舊版 Node.js，使用 nvm-windows 的方法，並執行 <code>nvm use 22</code> 切換版本。
+          </li>
+        </ul>
+      </details>
     </section>
 
     <!-- Step 3: 安裝 OpenClaw CLI -->
     <section class="step" data-step="3" hidden>
       <header>
         <h2>Step 3 / 9 &middot; 安裝 OpenClaw CLI</h2>
-        <p>用 npm 全域安裝 OpenClaw</p>
+        <p>用 npm 全域安裝 OpenClaw 命令列工具</p>
       </header>
 
-      <p>TODO: 待撰寫 — npm install 指令、驗證、常見問題。</p>
-
+      <h3>安裝指令</h3>
+      <p>在<strong>系統管理員身分的 PowerShell</strong> 中執行：</p>
       <pre data-copy><code>npm install -g openclaw</code></pre>
+      <p>安裝過程中會看到一堆文字滾動，這是正常的。等它完成（回到命令提示符號）即可。</p>
+
+      <h3>驗證安裝</h3>
       <pre data-copy><code>openclaw --version</code></pre>
+      <p>應該看到版本號，例如 <code>openclaw/2.x.x</code>。</p>
+
+      <h3>順便更新 npm（可選）</h3>
+      <p>如果你的 npm 版本偏舊，可以一併更新：</p>
+      <pre data-copy><code>npm install -g npm@latest</code></pre>
+
+      <details>
+        <summary>遇到問題？</summary>
+        <ul>
+          <li>
+            <strong>EACCES 或 permission denied 錯誤</strong><br>
+            請確認你是用<strong>系統管理員身分</strong>開啟 PowerShell（對 PowerShell 圖示按右鍵 → 以系統管理員身分執行）。
+          </li>
+          <li>
+            <strong>安裝很慢或逾時</strong><br>
+            npm 有時候慢，正常等候即可。如果一直逾時，試試換用 npx 安裝：<code>npx openclaw@latest</code>
+          </li>
+          <li>
+            <strong>openclaw: command not found</strong><br>
+            關閉 PowerShell，重新以系統管理員身分開啟，再輸入 <code>openclaw --version</code>。
+          </li>
+          <li>
+            <strong>Windows Defender SmartScreen 警告</strong><br>
+            點選「更多資訊」→「仍要執行」。OpenClaw 是開源軟體，無惡意程式。
+          </li>
+        </ul>
+      </details>
     </section>
 
     <!-- Step 4: 申請 API Key -->
     <section class="step" data-step="4" hidden>
       <header>
         <h2>Step 4 / 9 &middot; 申請 API Key</h2>
-        <p>取得 AI 模型的存取金鑰</p>
+        <p>取得讓 AI 模型說話的鑰匙</p>
       </header>
 
-      <p>TODO: 待撰寫 — OpenRouter 註冊流程、Anthropic / OpenAI 備案。</p>
+      <h3>什麼是 API Key？</h3>
+      <p>
+        API Key 就像一張門票，讓 OpenClaw 可以去敲 AI 公司（例如 Anthropic 或 OpenAI）的門，
+        叫模型幫你回答問題。使用多少算多少費用，你可以完全控制。
+      </p>
+
+      <h3>推薦：OpenRouter（最簡單）</h3>
+      <p>OpenRouter 是一個 AI 模型的聚合平台，一組 Key 可以用多種模型，包含 Claude、GPT-4、Gemini。</p>
+      <ol>
+        <li>前往 <a href="https://openrouter.ai/" target="_blank">https://openrouter.ai/</a></li>
+        <li>點選右上角「Sign In」→ 用 Google 帳號或 Email 註冊</li>
+        <li>登入後點選右上角你的頭像 → <strong>「API Keys」</strong></li>
+        <li>點「+ Create Key」，輸入任意名稱（例如 <code>openclaw-key</code>）</li>
+        <li>複製產生的 Key（格式類似 <code>sk-or-v1-xxxxxxxx</code>）</li>
+        <li>回到側邊欄點「Credits」→ 儲值至少 $5 美元</li>
+      </ol>
+
+      <div role="alert" class="notice">
+        ⚠️ <strong>重要：</strong>API Key 只會顯示一次！複製後立刻貼到記事本存好，關掉頁面就看不到了。
+      </div>
+
+      <h3>備案一：Anthropic（直連 Claude）</h3>
+      <ol>
+        <li>前往 <a href="https://console.anthropic.com/" target="_blank">https://console.anthropic.com/</a></li>
+        <li>註冊帳號並驗證 Email</li>
+        <li>前往「API Keys」→ 建立新 Key</li>
+        <li>「Billing」→ 儲值</li>
+      </ol>
+
+      <h3>備案二：OpenAI（直連 GPT）</h3>
+      <ol>
+        <li>前往 <a href="https://platform.openai.com/" target="_blank">https://platform.openai.com/</a></li>
+        <li>登入後前往「API Keys」→ 建立新 Key</li>
+        <li>「Billing」→ 儲值</li>
+      </ol>
+
+      <details>
+        <summary>遇到問題？</summary>
+        <ul>
+          <li>
+            <strong>OpenRouter 要求信用卡驗證</strong><br>
+            這是正常的付費流程。也可以選 Anthropic，有些帳號有免費試用額度。
+          </li>
+          <li>
+            <strong>不確定要選哪個模型</strong><br>
+            先用 OpenRouter，預設模型通常是 Claude 3.5 Sonnet，品質很好。
+          </li>
+        </ul>
+      </details>
+
+      <p>API Key 已經安全保存了嗎？下一步要用它！</p>
     </section>
 
     <!-- Step 5: 初始化設定 -->
     <section class="step" data-step="5" hidden>
       <header>
         <h2>Step 5 / 9 &middot; 初始化設定</h2>
-        <p>執行 openclaw init 完成首次設定</p>
+        <p>告訴 OpenClaw 你的 API Key 和 agent 名字</p>
       </header>
 
-      <p>TODO: 待撰寫 — openclaw init 互動流程、填入 API Key、設定 agent 名稱。</p>
-
+      <h3>執行初始化</h3>
+      <p>在 PowerShell 中執行：</p>
       <pre data-copy><code>openclaw init</code></pre>
+      <p>它會互動式地問你幾個問題：</p>
+
+      <figure>
+        <table>
+          <thead>
+            <tr>
+              <th>問題</th>
+              <th>建議填法</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AI Provider?</td>
+              <td>選 <code>openrouter</code>（或你申請的那個）</td>
+            </tr>
+            <tr>
+              <td>API Key?</td>
+              <td>貼上 Step 4 複製的 Key</td>
+            </tr>
+            <tr>
+              <td>Agent name?</td>
+              <td>隨意取，例如 <code>myagent</code></td>
+            </tr>
+            <tr>
+              <td>其餘設定</td>
+              <td>直接按 Enter 使用預設值</td>
+            </tr>
+          </tbody>
+        </table>
+      </figure>
+
+      <h3>確認設定已儲存</h3>
       <pre data-copy><code>openclaw config show</code></pre>
+      <p>
+        你應該看到設定內容列出來，包含 provider、API Key（通常遮住部分字元）和 agent 名稱。
+      </p>
+
+      <details>
+        <summary>遇到問題？</summary>
+        <ul>
+          <li>
+            <strong>init 沒有互動，直接跳出</strong><br>
+            試試 <code>openclaw init --force</code> 重新初始化。
+          </li>
+          <li>
+            <strong>API Key 格式錯誤</strong><br>
+            確認沒有多餘的空格。OpenRouter 的 Key 開頭是 <code>sk-or-v1-</code>，Anthropic 是 <code>sk-ant-</code>，OpenAI 是 <code>sk-</code>。
+          </li>
+          <li>
+            <strong>想手動編輯設定檔</strong><br>
+            設定檔通常在 <code>%USERPROFILE%\.openclaw\config.json</code>，用記事本直接編輯也可以。
+          </li>
+        </ul>
+      </details>
     </section>
 
     <!-- Step 6: 第一次對話 -->
     <section class="step" data-step="6" hidden>
       <header>
         <h2>Step 6 / 9 &middot; 第一次對話</h2>
-        <p>與你的 AI Agent 說第一句話</p>
+        <p>跟你的 AI agent 說第一句話</p>
       </header>
 
-      <p>TODO: 待撰寫 — openclaw chat 測試、預期回覆、成功標準。</p>
-
+      <h3>啟動對話</h3>
       <pre data-copy><code>openclaw chat</code></pre>
+      <p>等待一兩秒後，你會看到 agent 準備好的提示符號。</p>
+
+      <h3>測試對話</h3>
+      <p>試試輸入這幾句，確認 agent 有正常回覆：</p>
+      <pre data-copy><code>你好，請用繁體中文跟我自我介紹</code></pre>
+      <pre data-copy><code>請問現在幾點？</code></pre>
+
+      <p>
+        <strong>成功標準：</strong>agent 能用完整的繁體中文句子回覆，內容合理（不是錯誤訊息）。
+      </p>
+
+      <h3>結束對話</h3>
+      <p>按 <kbd>Ctrl + C</kbd> 離開。</p>
+
+      <details>
+        <summary>遇到問題？</summary>
+        <ul>
+          <li>
+            <strong>回覆是英文</strong><br>
+            在訊息中加上「請用繁體中文回答」，或在初始化時設定預設語言。
+          </li>
+          <li>
+            <strong>API 錯誤：401 Unauthorized</strong><br>
+            API Key 可能打錯了。重新執行 <code>openclaw init</code> 更正。
+          </li>
+          <li>
+            <strong>API 錯誤：429 Too Many Requests</strong><br>
+            帳戶沒有餘額。回到 OpenRouter / Anthropic 的 Billing 頁面儲值。
+          </li>
+          <li>
+            <strong>沒有任何回覆，就一直等</strong><br>
+            按 Ctrl+C 中止，確認網路連線，再試一次。
+          </li>
+        </ul>
+      </details>
+
+      <p>太棒了！agent 能說話了。下一步讓它住進 Telegram！</p>
     </section>
 
     <!-- Step 7: 接通 Telegram -->
     <section class="step" data-step="7" hidden>
       <header>
         <h2>Step 7 / 9 &middot; 接通 Telegram</h2>
-        <p>讓你的 Agent 住進 Telegram</p>
+        <p>建立 Telegram bot，讓你從手機就能跟 agent 聊天</p>
       </header>
 
-      <p>TODO: 待撰寫 — BotFather 建立 bot、取得 token、設定 gateway、啟動。</p>
+      <h3>第一部分：建立 Telegram Bot</h3>
+      <ol>
+        <li>打開 Telegram，在搜尋欄輸入 <strong>@BotFather</strong></li>
+        <li>點進去，按「Start」或輸入 <code>/start</code></li>
+        <li>輸入 <code>/newbot</code></li>
+        <li>依提示輸入你的 bot 全名（顯示名稱），例如：<code>My OpenClaw Agent</code></li>
+        <li>再輸入 bot 的 username（必須以 <code>bot</code> 結尾），例如：<code>myopenclaw_bot</code></li>
+        <li>BotFather 會給你一段 <strong>Bot Token</strong>，格式類似：<code>1234567890:ABCdef...</code></li>
+        <li>複製這個 Token，妥善保存</li>
+      </ol>
 
+      <div role="alert" class="notice">
+        ⚠️ <strong>Token 請小心保管</strong>：不要分享給別人，否則別人可以控制你的 bot。
+      </div>
+
+      <h3>第二部分：連接 OpenClaw</h3>
+      <p>回到 PowerShell，設定 Telegram gateway（把 <code>YOUR_BOT_TOKEN</code> 換成剛才複製的 Token）：</p>
       <pre data-copy><code>openclaw gateway telegram --token YOUR_BOT_TOKEN</code></pre>
+
+      <h3>第三部分：啟動 Agent</h3>
       <pre data-copy><code>openclaw start</code></pre>
+      <p>看到 agent 啟動成功的訊息後，打開 Telegram，找到你的 bot（搜尋你設定的 username），發一則訊息：</p>
+      <pre data-copy><code>/start</code></pre>
+      <p><strong>成功標準：</strong>bot 在 10 秒內回覆，內容是 agent 的自我介紹。</p>
+
+      <details>
+        <summary>遇到問題？</summary>
+        <ul>
+          <li>
+            <strong>Bot 沒有回覆</strong><br>
+            確認 PowerShell 那邊的 <code>openclaw start</code> 還在跑（沒有出現錯誤）。如果有錯誤訊息，複製給講師看。
+          </li>
+          <li>
+            <strong>Token invalid 錯誤</strong><br>
+            回去 BotFather 點選 /mybots → 你的 bot → API Token，重新複製完整的 token。注意不要多複製空格。
+          </li>
+          <li>
+            <strong>Bot 不存在或找不到</strong><br>
+            Telegram username 搜尋有時候慢，試著直接輸入完整的 <code>@username</code>。
+          </li>
+        </ul>
+      </details>
     </section>
 
     <!-- Step 8: 驗收 -->
     <section class="step" data-step="8" hidden>
       <header>
         <h2>Step 8 / 9 &middot; 驗收</h2>
-        <p>確認所有元件正常運作</p>
+        <p>確認一切都正常運作</p>
       </header>
 
-      <p>TODO: 待撰寫 — 驗收清單、後續資源連結、更新指令。</p>
+      <h3>驗收清單</h3>
+      <p>逐一確認以下項目，全部打勾就完成了！</p>
 
+      <ul>
+        <li>
+          <label>
+            <input type="checkbox">
+            <code>node --version</code> 顯示 v22 以上
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <code>openclaw --version</code> 顯示版本號
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <code>openclaw config show</code> 顯示完整設定
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <code>openclaw chat</code> 能收到 agent 的中文回覆
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            從 Telegram 發訊息，10 秒內收到 bot 回覆
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            回覆內容合理，不是錯誤訊息
+          </label>
+        </li>
+      </ul>
+
+      <h3>快速驗證指令</h3>
       <pre data-copy><code>openclaw --version</code></pre>
       <pre data-copy><code>openclaw config show</code></pre>
+
+      <h3>日後維護</h3>
+      <p>未來如何更新 OpenClaw：</p>
+      <pre data-copy><code>npm update -g openclaw</code></pre>
+
+      <p>想重新設定 agent：</p>
+      <pre data-copy><code>openclaw init --force</code></pre>
+
+      <h3>後續資源</h3>
+      <ul>
+        <li><a href="https://github.com/openclaw/openclaw" target="_blank">OpenClaw GitHub</a> — 原始碼與 Issues</li>
+        <li>OpenClaw 官方文件（查 Skills、進階設定）</li>
+        <li>OpenRouter 文件 — 查詢可用模型與費用</li>
+      </ul>
+
+      <p>🎉 <strong>恭喜完成安裝！</strong>你的 AI agent 已經在線上了。繼續看 Step 9 預覽更多可能性。</p>
     </section>
 
     <!-- Step 9: 加碼 -->
     <section class="step" data-step="9" hidden>
       <header>
         <h2>Step 9 / 9 &middot; 加碼</h2>
-        <p>進階功能預覽</p>
+        <p>你已經建好地基，現在來看看蓋得多高</p>
       </header>
 
-      <p>TODO: 待撰寫 — Skills 系統、其他平台、多 agent 協作、排程任務。</p>
+      <h3>Skills 系統</h3>
+      <p>
+        Skills 是讓 agent 學會新技能的方式。每個 Skill 是一個 Markdown 檔，
+        描述 agent 遇到特定指令時該做什麼。
+      </p>
+      <p>例如：建立一個「每天早上 8 點傳天氣報告」的 skill，或「幫我把英文翻譯成中文」的 skill。</p>
+      <pre data-copy><code>openclaw skills list</code></pre>
+
+      <h3>接通更多平台</h3>
+      <p>同一個 agent 可以同時連接多個平台：</p>
+      <figure>
+        <table>
+          <thead>
+            <tr>
+              <th>平台</th>
+              <th>指令</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Discord</td>
+              <td><code>openclaw gateway discord --token BOT_TOKEN</code></td>
+            </tr>
+            <tr>
+              <td>WhatsApp</td>
+              <td><code>openclaw gateway whatsapp</code>（QR Code 配對）</td>
+            </tr>
+            <tr>
+              <td>LINE</td>
+              <td><code>openclaw gateway line --token TOKEN</code></td>
+            </tr>
+            <tr>
+              <td>Slack</td>
+              <td><code>openclaw gateway slack --token TOKEN</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </figure>
+
+      <h3>自訂 System Prompt</h3>
+      <p>
+        你可以在設定檔中指定 agent 的個性和限制。
+        例如讓它只回答工作相關問題，或讓它扮演特定角色。
+      </p>
+      <pre data-copy><code>openclaw config set system_prompt "你是一個專業的財務助理，只回答財務相關問題。"</code></pre>
+
+      <h3>排程任務</h3>
+      <p>讓 agent 自動執行週期性任務：</p>
+      <pre data-copy><code>openclaw schedule add --cron "0 8 * * *" --task "發送今日天氣報告到 Telegram"</code></pre>
+
+      <h3>多 Agent 協作</h3>
+      <p>
+        進階玩法：建立多個有不同職責的 agent，讓它們互相合作。
+        例如一個負責研究、一個負責寫作、一個負責審核。
+        這是 OpenClaw 的 A2A（Agent-to-Agent）功能預覽。
+      </p>
+
+      <h3>下一步建議</h3>
+      <ol>
+        <li><strong>玩一週</strong>：每天想一個用 agent 幫你做的事，看它能做到什麼程度</li>
+        <li><strong>建第一個 Skill</strong>：把你常做的重複性工作自動化</li>
+        <li><strong>加入社群</strong>：在 GitHub Discussions 分享你的用法、看別人的 Skill</li>
+        <li><strong>接通第二個平台</strong>：試試 Discord 或 WhatsApp</li>
+      </ol>
+
+      <hr>
+
+      <p>
+        感謝你完成這堂課！如果有任何問題，歡迎在課後繼續問。<br>
+        <em>你的 AI agent 時代，從今天開始。</em>
+      </p>
     </section>
 
   </main>

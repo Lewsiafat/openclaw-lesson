@@ -53,20 +53,20 @@ openclaw-lesson/
   - 確認 `openclaw init` 互動流程
   - 記錄實際指令與輸出，用於填入教學內容
 
-- [ ] **Task 1: Create index.html skeleton**
+- [x] **Task 1: Create index.html skeleton**
   - Step 0 + Steps 1-9 完整結構
   - 所有 `<section class="step">` 標記正確
   - 導覽按鈕可正常切換
   - `data-total-steps="9"` 和 `data-storage-key="openclaw-course-step"` 設定正確
   - **驗收：** 本地開啟，可用上一步/下一步瀏覽所有步驟
 
-- [ ] **Task 2: Write Step 0 content**
+- [x] **Task 2: Write Step 0 content**
   - OpenClaw 介紹（是什麼、能做什麼）
   - 與其他方案比較表（hermes-agent / nanobot / 直接用 ChatGPT）
   - 這堂課的目標與流程說明
   - **驗收：** 內容完整、排版正確
 
-- [ ] **Task 3: Write Steps 1-4 content**
+- [x] **Task 3: Write Steps 1-4 content**
   - Step 1: 前置需求確認（含 winver 指令）
   - Step 2: Node.js 安裝（nvm-windows + 官方安裝程式雙路徑）
   - Step 3: OpenClaw CLI 安裝（含驗證指令）
@@ -75,13 +75,13 @@ openclaw-lesson/
   - 每步都有 `<details>` 疑難排解區塊
   - **驗收：** 所有指令可複製、排版正確
 
-- [ ] **Task 4: Write Steps 5-7 content**
+- [x] **Task 4: Write Steps 5-7 content**
   - Step 5: 初始化設定（openclaw init 流程）
   - Step 6: 第一次對話（openclaw chat 測試）
   - Step 7: Telegram 接通（BotFather → token → gateway）
   - **驗收：** 流程完整、指令正確
 
-- [ ] **Task 5: Write Steps 8-9 content**
+- [x] **Task 5: Write Steps 8-9 content**
   - Step 8: 驗收清單（所有檢查項目）
   - Step 9: 加碼（Skills、其他平台、進階功能）
   - **驗收：** 驗收清單可勾選、加碼內容有吸引力
