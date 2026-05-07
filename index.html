@@ -347,13 +347,6 @@ npm --version</code></pre>
               <td>Select channel (QuickStart)</td>
               <td>選 <code>telegram</code>，貼上 Step 6 取得的 Bot Token</td>
             </tr>
-            <tr>
-              <td>Choose how the gateway should run in the background</td>
-              <td>
-                選第二項 <strong>System service</strong>（開機自動啟動，以你的帳號身分執行）。<br>
-                <small>需要管理員權限，已在系統管理員 PowerShell 下執行所以沒問題。</small>
-              </td>
-            </tr>
           </tbody>
         </table>
       </figure>
@@ -403,9 +396,10 @@ npm --version</code></pre>
         ⚠️ <strong>Token 請小心保管</strong>：不要分享給別人，否則別人可以控制你的 bot。
       </div>
 
-      <h3>第二部分：確認 Agent 已啟動</h3>
-      <p>選了 System service 後，onboard 完成時 agent 會自動在背景啟動，不需要手動執行 <code>openclaw start</code>。</p>
-      <p>打開 Telegram，找到你的 bot（搜尋剛才設定的 username），發一則訊息：</p>
+      <h3>第二部分：啟動 Agent</h3>
+      <p>完成 Step 5 onboard 並填入 Token 後，啟動 agent：</p>
+      <pre data-copy><code>openclaw start</code></pre>
+      <p>看到啟動成功的訊息後，打開 Telegram，找到你的 bot（搜尋剛才設定的 username），發一則訊息：</p>
       <pre data-copy><code>/start</code></pre>
       <p><strong>成功標準：</strong>bot 在 10 秒內回覆，內容是 agent 的自我介紹。</p>
 
