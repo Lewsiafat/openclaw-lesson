@@ -99,8 +99,8 @@
         Step 3 安裝 OpenClaw →
         Step 4 申請 API Key →
         Step 5 初始化 →
-        Step 6 第一次對話 →
-        Step 7 接通 Telegram →
+        Step 6 接通 Telegram →
+        Step 7 第一次對話 →
         Step 8 驗收 →
         Step 9 加碼
       </p>
@@ -121,7 +121,7 @@
         <li>✅ <strong>管理員權限</strong>（能安裝軟體）</li>
         <li>✅ <strong>穩定網路</strong>（需下載約 100MB）</li>
         <li>✅ <strong>瀏覽器</strong>（Chrome 或 Edge 皆可）</li>
-        <li>✅ <strong>Telegram 帳號</strong>（Step 7 會用到）</li>
+        <li>✅ <strong>Telegram 帳號</strong>（Step 6 會用到）</li>
         <li>✅ <strong>信用卡或 PayPal</strong>（申請 API Key 時需要少量儲值，約 $5 美元）</li>
       </ul>
 
@@ -308,38 +308,44 @@ npm --version</code></pre>
     <section class="step" data-step="5" hidden>
       <header>
         <h2>Step 5 / 9 &middot; 初始化設定</h2>
-        <p>告訴 OpenClaw 你的 API Key 和 agent 名字</p>
+        <p>執行 onboard 精靈，完成 API Key 設定與頻道選擇</p>
       </header>
 
-      <h3>執行初始化</h3>
-      <p>在 PowerShell 中執行：</p>
-      <pre data-copy><code>openclaw init</code></pre>
-      <p>它會互動式地問你幾個問題：</p>
+      <div role="alert" class="notice">
+        ⚠️ <strong>先備好 Telegram Bot Token！</strong>
+        onboard 精靈會在最後一步要求選擇頻道（QuickStart）。
+        建議先跳到 Step 6 建立 Telegram bot、取得 token，再回來執行這個步驟。
+      </div>
+
+      <h3>執行 onboard 精靈</h3>
+      <p>在<strong>系統管理員身分的 PowerShell</strong> 中執行：</p>
+      <pre data-copy><code>openclaw onboard --install-daemon</code></pre>
+      <p>精靈會依序問你以下問題：</p>
 
       <figure>
         <table>
           <thead>
             <tr>
-              <th>問題</th>
-              <th>建議填法</th>
+              <th>提示訊息</th>
+              <th>說明與建議填法</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>AI Provider?</td>
-              <td>選 <code>openrouter</code>（或你申請的那個）</td>
+              <td><em>I understand this is personal-by-default and shared/multi-user use requires lock-down. Continue?</em></td>
+              <td>預設是個人使用模式（只有你能控制 agent）。輸入 <code>y</code> 確認繼續。</td>
+            </tr>
+            <tr>
+              <td>Model/auth provider</td>
+              <td>選 <code>openrouter</code>（或你在 Step 4 申請的那個）</td>
             </tr>
             <tr>
               <td>API Key?</td>
               <td>貼上 Step 4 複製的 Key</td>
             </tr>
             <tr>
-              <td>Agent name?</td>
-              <td>隨意取，例如 <code>myagent</code></td>
-            </tr>
-            <tr>
-              <td>其餘設定</td>
-              <td>直接按 Enter 使用預設值</td>
+              <td>Select channel (QuickStart)</td>
+              <td>選 <code>telegram</code>，貼上 Step 6 取得的 Bot Token</td>
             </tr>
           </tbody>
         </table>
@@ -347,16 +353,14 @@ npm --version</code></pre>
 
       <h3>確認設定已儲存</h3>
       <pre data-copy><code>openclaw config show</code></pre>
-      <p>
-        你應該看到設定內容列出來，包含 provider、API Key（通常遮住部分字元）和 agent 名稱。
-      </p>
+      <p>應該看到 provider、API Key（部分遮蔽）與頻道設定。</p>
 
       <details>
         <summary>遇到問題？</summary>
         <ul>
           <li>
-            <strong>init 沒有互動，直接跳出</strong><br>
-            試試 <code>openclaw init --force</code> 重新初始化。
+            <strong>onboard 沒有互動，直接跳出</strong><br>
+            試試重新執行 <code>openclaw onboard --install-daemon</code>，或以系統管理員身分開啟新的 PowerShell 再試。
           </li>
           <li>
             <strong>API Key 格式錯誤</strong><br>
@@ -370,59 +374,11 @@ npm --version</code></pre>
       </details>
     </section>
 
-    <!-- Step 6: 第一次對話 -->
+    <!-- Step 6: 接通 Telegram -->
     <section class="step" data-step="6" hidden>
       <header>
-        <h2>Step 6 / 9 &middot; 第一次對話</h2>
-        <p>跟你的 AI agent 說第一句話</p>
-      </header>
-
-      <h3>啟動對話</h3>
-      <pre data-copy><code>openclaw chat</code></pre>
-      <p>等待一兩秒後，你會看到 agent 準備好的提示符號。</p>
-
-      <h3>測試對話</h3>
-      <p>試試輸入這幾句，確認 agent 有正常回覆：</p>
-      <pre data-copy><code>你好，請用繁體中文跟我自我介紹</code></pre>
-      <pre data-copy><code>請問現在幾點？</code></pre>
-
-      <p>
-        <strong>成功標準：</strong>agent 能用完整的繁體中文句子回覆，內容合理（不是錯誤訊息）。
-      </p>
-
-      <h3>結束對話</h3>
-      <p>按 <kbd>Ctrl + C</kbd> 離開。</p>
-
-      <details>
-        <summary>遇到問題？</summary>
-        <ul>
-          <li>
-            <strong>回覆是英文</strong><br>
-            在訊息中加上「請用繁體中文回答」，或在初始化時設定預設語言。
-          </li>
-          <li>
-            <strong>API 錯誤：401 Unauthorized</strong><br>
-            API Key 可能打錯了。重新執行 <code>openclaw init</code> 更正。
-          </li>
-          <li>
-            <strong>API 錯誤：429 Too Many Requests</strong><br>
-            帳戶沒有餘額。回到 OpenRouter / Anthropic 的 Billing 頁面儲值。
-          </li>
-          <li>
-            <strong>沒有任何回覆，就一直等</strong><br>
-            按 Ctrl+C 中止，確認網路連線，再試一次。
-          </li>
-        </ul>
-      </details>
-
-      <p>太棒了！agent 能說話了。下一步讓它住進 Telegram！</p>
-    </section>
-
-    <!-- Step 7: 接通 Telegram -->
-    <section class="step" data-step="7" hidden>
-      <header>
-        <h2>Step 7 / 9 &middot; 接通 Telegram</h2>
-        <p>建立 Telegram bot，讓你從手機就能跟 agent 聊天</p>
+        <h2>Step 6 / 9 &middot; 接通 Telegram</h2>
+        <p>建立 Telegram bot，取得 Token，準備在 Step 5 onboard 時填入</p>
       </header>
 
       <h3>第一部分：建立 Telegram Bot</h3>
@@ -433,20 +389,17 @@ npm --version</code></pre>
         <li>依提示輸入你的 bot 全名（顯示名稱），例如：<code>My OpenClaw Agent</code></li>
         <li>再輸入 bot 的 username（必須以 <code>bot</code> 結尾），例如：<code>myopenclaw_bot</code></li>
         <li>BotFather 會給你一段 <strong>Bot Token</strong>，格式類似：<code>1234567890:ABCdef...</code></li>
-        <li>複製這個 Token，妥善保存</li>
+        <li>複製這個 Token，貼到記事本備用</li>
       </ol>
 
       <div role="alert" class="notice">
         ⚠️ <strong>Token 請小心保管</strong>：不要分享給別人，否則別人可以控制你的 bot。
       </div>
 
-      <h3>第二部分：連接 OpenClaw</h3>
-      <p>回到 PowerShell，設定 Telegram gateway（把 <code>YOUR_BOT_TOKEN</code> 換成剛才複製的 Token）：</p>
-      <pre data-copy><code>openclaw gateway telegram --token YOUR_BOT_TOKEN</code></pre>
-
-      <h3>第三部分：啟動 Agent</h3>
+      <h3>第二部分：啟動 Agent</h3>
+      <p>完成 Step 5 onboard 並填入 Token 後，啟動 agent：</p>
       <pre data-copy><code>openclaw start</code></pre>
-      <p>看到 agent 啟動成功的訊息後，打開 Telegram，找到你的 bot（搜尋你設定的 username），發一則訊息：</p>
+      <p>看到啟動成功的訊息後，打開 Telegram，找到你的 bot（搜尋剛才設定的 username），發一則訊息：</p>
       <pre data-copy><code>/start</code></pre>
       <p><strong>成功標準：</strong>bot 在 10 秒內回覆，內容是 agent 的自我介紹。</p>
 
@@ -467,6 +420,51 @@ npm --version</code></pre>
           </li>
         </ul>
       </details>
+    </section>
+
+    <!-- Step 7: 第一次對話 -->
+    <section class="step" data-step="7" hidden>
+      <header>
+        <h2>Step 7 / 9 &middot; 第一次對話</h2>
+        <p>從 Telegram 跟你的 AI agent 說第一句話</p>
+      </header>
+
+      <h3>從 Telegram 發訊息</h3>
+      <p>打開 Telegram，找到你的 bot，試試輸入這幾句：</p>
+      <pre data-copy><code>你好，請用繁體中文跟我自我介紹</code></pre>
+      <pre data-copy><code>請問現在幾點？</code></pre>
+
+      <p>
+        <strong>成功標準：</strong>agent 能用完整的繁體中文句子回覆，內容合理（不是錯誤訊息）。
+      </p>
+
+      <h3>也可以在終端機測試</h3>
+      <pre data-copy><code>openclaw chat</code></pre>
+      <p>按 <kbd>Ctrl + C</kbd> 離開。</p>
+
+      <details>
+        <summary>遇到問題？</summary>
+        <ul>
+          <li>
+            <strong>回覆是英文</strong><br>
+            在訊息中加上「請用繁體中文回答」，或重新執行 onboard 設定語言偏好。
+          </li>
+          <li>
+            <strong>API 錯誤：401 Unauthorized</strong><br>
+            API Key 可能打錯了。重新執行 <code>openclaw onboard --install-daemon</code> 更正。
+          </li>
+          <li>
+            <strong>API 錯誤：429 Too Many Requests</strong><br>
+            帳戶沒有餘額。回到 OpenRouter / Anthropic 的 Billing 頁面儲值。
+          </li>
+          <li>
+            <strong>沒有任何回覆，就一直等</strong><br>
+            確認 <code>openclaw start</code> 還在跑，網路連線正常，再試一次。
+          </li>
+        </ul>
+      </details>
+
+      <p>太棒了！agent 能說話了。繼續做最後驗收！</p>
     </section>
 
     <!-- Step 8: 驗收 -->
@@ -527,7 +525,7 @@ npm --version</code></pre>
       <pre data-copy><code>npm update -g openclaw</code></pre>
 
       <p>想重新設定 agent：</p>
-      <pre data-copy><code>openclaw init --force</code></pre>
+      <pre data-copy><code>openclaw onboard --install-daemon</code></pre>
 
       <h3>後續資源</h3>
       <ul>
