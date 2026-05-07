@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenClaw Windows 安裝課程</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-total-steps="9" data-storage-key="openclaw-course-step">
+
+  <header>
+    <hgroup>
+      <h1>OpenClaw Windows 安裝課程</h1>
+      <p>60 分鐘，從零到能用</p>
+    </hgroup>
+    <div id="progress"><span id="progress-text">前言</span></div>
+  </header>
+
+  <main>
+
+    <!-- Step 0: 前言 -->
+    <section class="step" data-step="0">
+      <header>
+        <h2>Step 0 / 9 &middot; 前言</h2>
+        <p>為什麼選 OpenClaw？這堂課要做什麼？</p>
+      </header>
+
+      <p>
+        OpenClaw 是一套基於 TypeScript / Node.js 的開源 AI Agent 框架，
+        支援超過 50 種平台整合（Telegram、WhatsApp、Discord 等），
+        並且原生支援 Windows — 不需要 WSL2 或 Docker。
+      </p>
+      <p>
+        這堂課會帶你在 60 分鐘內完成：安裝 Node.js → 安裝 OpenClaw CLI → 申請 API Key → 初始化設定 → 第一次對話 → 接通 Telegram。
+      </p>
+
+      <p>TODO: 與其他方案（hermes-agent / nanobot / ChatGPT）的比較表待補充。</p>
+    </section>
+
+    <!-- Step 1: 確認前置需求 -->
+    <section class="step" data-step="1" hidden>
+      <header>
+        <h2>Step 1 / 9 &middot; 確認前置需求</h2>
+        <p>確保你的環境符合最低要求</p>
+      </header>
+
+      <p>TODO: 待撰寫 — Windows 11 版本確認、管理員權限、網路、Telegram 帳號檢查。</p>
+
+      <pre data-copy><code>winver</code></pre>
+    </section>
+
+    <!-- Step 2: 安裝 Node.js 22+ -->
+    <section class="step" data-step="2" hidden>
+      <header>
+        <h2>Step 2 / 9 &middot; 安裝 Node.js 22+</h2>
+        <p>OpenClaw 需要 Node.js 22.14 以上</p>
+      </header>
+
+      <p>TODO: 待撰寫 — nvm-windows 安裝路徑 + 官方安裝程式備案。</p>
+
+      <pre data-copy><code>node --version
+npm --version</code></pre>
+    </section>
+
+    <!-- Step 3: 安裝 OpenClaw CLI -->
+    <section class="step" data-step="3" hidden>
+      <header>
+        <h2>Step 3 / 9 &middot; 安裝 OpenClaw CLI</h2>
+        <p>用 npm 全域安裝 OpenClaw</p>
+      </header>
+
+      <p>TODO: 待撰寫 — npm install 指令、驗證、常見問題。</p>
+
+      <pre data-copy><code>npm install -g openclaw</code></pre>
+      <pre data-copy><code>openclaw --version</code></pre>
+    </section>
+
+    <!-- Step 4: 申請 API Key -->
+    <section class="step" data-step="4" hidden>
+      <header>
+        <h2>Step 4 / 9 &middot; 申請 API Key</h2>
+        <p>取得 AI 模型的存取金鑰</p>
+      </header>
+
+      <p>TODO: 待撰寫 — OpenRouter 註冊流程、Anthropic / OpenAI 備案。</p>
+    </section>
+
+    <!-- Step 5: 初始化設定 -->
+    <section class="step" data-step="5" hidden>
+      <header>
+        <h2>Step 5 / 9 &middot; 初始化設定</h2>
+        <p>執行 openclaw init 完成首次設定</p>
+      </header>
+
+      <p>TODO: 待撰寫 — openclaw init 互動流程、填入 API Key、設定 agent 名稱。</p>
+
+      <pre data-copy><code>openclaw init</code></pre>
+      <pre data-copy><code>openclaw config show</code></pre>
+    </section>
+
+    <!-- Step 6: 第一次對話 -->
+    <section class="step" data-step="6" hidden>
+      <header>
+        <h2>Step 6 / 9 &middot; 第一次對話</h2>
+        <p>與你的 AI Agent 說第一句話</p>
+      </header>
+
+      <p>TODO: 待撰寫 — openclaw chat 測試、預期回覆、成功標準。</p>
+
+      <pre data-copy><code>openclaw chat</code></pre>
+    </section>
+
+    <!-- Step 7: 接通 Telegram -->
+    <section class="step" data-step="7" hidden>
+      <header>
+        <h2>Step 7 / 9 &middot; 接通 Telegram</h2>
+        <p>讓你的 Agent 住進 Telegram</p>
+      </header>
+
+      <p>TODO: 待撰寫 — BotFather 建立 bot、取得 token、設定 gateway、啟動。</p>
+
+      <pre data-copy><code>openclaw gateway telegram --token YOUR_BOT_TOKEN</code></pre>
+      <pre data-copy><code>openclaw start</code></pre>
+    </section>
+
+    <!-- Step 8: 驗收 -->
+    <section class="step" data-step="8" hidden>
+      <header>
+        <h2>Step 8 / 9 &middot; 驗收</h2>
+        <p>確認所有元件正常運作</p>
+      </header>
+
+      <p>TODO: 待撰寫 — 驗收清單、後續資源連結、更新指令。</p>
+
+      <pre data-copy><code>openclaw --version</code></pre>
+      <pre data-copy><code>openclaw config show</code></pre>
+    </section>
+
+    <!-- Step 9: 加碼 -->
+    <section class="step" data-step="9" hidden>
+      <header>
+        <h2>Step 9 / 9 &middot; 加碼</h2>
+        <p>進階功能預覽</p>
+      </header>
+
+      <p>TODO: 待撰寫 — Skills 系統、其他平台、多 agent 協作、排程任務。</p>
+    </section>
+
+  </main>
+
+  <nav id="step-nav">
+    <button id="prev-btn" disabled>上一步</button>
+    <button id="next-btn">下一步</button>
+  </nav>
+
+  <footer>
+    <p>OpenClaw Windows 安裝課程 &mdash; MIT License</p>
+  </footer>
+
+  <script src="wizard.js"></script>
+</body>
+</html>
