@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OpenClaw Windows 安裝課程</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body data-total-steps="9" data-storage-key="openclaw-course-step">
-
-  <header>
+  <header class="container">
     <hgroup>
       <h1>OpenClaw Windows 安裝課程</h1>
       <p>60 分鐘，從零到能用</p>
     </hgroup>
-    <div id="progress"><span id="progress-text">前言</span></div>
+    <nav id="progress" aria-label="進度">
+      <span id="progress-text">Step 1 / 9</span>
+    </nav>
   </header>
 
-  <main>
+  <main class="container">
 
     <!-- Step 0: 前言 -->
     <section class="step" data-step="0">
       <header>
-        <h2>Step 0 / 9 &middot; 前言</h2>
-        <p>為什麼選 OpenClaw？這堂課要做什麼？</p>
+        <hgroup>
+          <h2>Step 0 / 9 · 前言</h2>
+          <p>為什麼選 OpenClaw？這堂課要做什麼？</p>
+        </hgroup>
       </header>
 
       <h3>OpenClaw 是什麼？</h3>
@@ -32,11 +35,18 @@
         你可以把它想成「自己架一個 AI 助理」——不是用別人的平台，而是完全跑在你自己的電腦或伺服器上。
       </p>
       <ul>
-        <li>支援超過 <strong>50 種平台整合</strong>（Telegram、WhatsApp、Discord、LINE…）</li>
-        <li><strong>原生支援 Windows</strong>，不需要 WSL2 或 Docker</li>
+        <li>支援超過 <strong>20 種平台整合</strong>（WhatsApp、Telegram、Slack、Discord、LINE、Signal、iMessage、Google Chat、Microsoft Teams、Matrix 等）</li>
+        <li><strong>Windows 可用</strong>：npm 安裝原生支援，daemon 與 gateway 建議搭配 WSL2 以獲得最佳體驗</li>
         <li>開源、免費、可自行修改</li>
         <li>透過 Skills 系統讓 agent 學會新能力</li>
       </ul>
+
+      <div role="alert" class="notice">
+        ⚠️ <strong>關於 WSL2：</strong>OpenClaw 官方建議「macOS、Linux、Windows（via WSL2；強烈推薦）」。
+        基本的 <code>npm install</code> 和 CLI 指令在 Windows 原生 PowerShell 即可運作，
+        但 daemon 和 gateway 在 WSL2 環境下運行最穩定。本課程以 Windows 原生 PowerShell 流程為主，
+        遇到問題時可考慮改用 WSL2。
+      </div>
 
       <h3>跟其他方案比較</h3>
       <figure>
@@ -53,16 +63,16 @@
           <tbody>
             <tr>
               <td><strong>OpenClaw</strong>（本課程）</td>
-              <td>⭐⭐ 中等</td>
-              <td>✅ 原生</td>
-              <td>50+ 平台</td>
+              <td>⭐⭐ 中等（npm 安裝）</td>
+              <td>✅ 原生 npm + 建議 WSL2</td>
+              <td>20+ 平台</td>
               <td>高</td>
             </tr>
             <tr>
               <td>hermes-agent</td>
-              <td>⭐⭐⭐ 需要 Docker</td>
-              <td>⚠️ 需 Docker Desktop</td>
-              <td>少數平台</td>
+              <td>⭐⭐ 中等（curl 一鍵安裝）</td>
+              <td>⚠️ 需要 WSL2（Linux/WSL 環境）</td>
+              <td>17+ 平台</td>
               <td>中</td>
             </tr>
             <tr>
@@ -111,8 +121,10 @@
     <!-- Step 1: 確認前置需求 -->
     <section class="step" data-step="1" hidden>
       <header>
-        <h2>Step 1 / 9 &middot; 確認前置需求</h2>
-        <p>確保你的環境符合最低要求，才能順利安裝</p>
+        <hgroup>
+          <h2>Step 1 / 9 · 確認前置需求</h2>
+          <p>~5 分鐘，確保你的環境符合最低要求</p>
+        </hgroup>
       </header>
 
       <h3>需要準備的東西</h3>
@@ -149,8 +161,10 @@
     <!-- Step 2: 安裝 Node.js 22+ -->
     <section class="step" data-step="2" hidden>
       <header>
-        <h2>Step 2 / 9 &middot; 安裝 Node.js 22+</h2>
-        <p>OpenClaw 需要 Node.js 22.14 以上才能執行</p>
+        <hgroup>
+          <h2>Step 2 / 9 · 安裝 Node.js 22+</h2>
+          <p>~10 分鐘，OpenClaw 需要 Node.js 22.14 以上</p>
+        </hgroup>
       </header>
 
       <h3>方法一：官方安裝程式（推薦新手）</h3>
@@ -204,13 +218,15 @@ npm --version</code></pre>
     <!-- Step 3: 安裝 OpenClaw CLI -->
     <section class="step" data-step="3" hidden>
       <header>
-        <h2>Step 3 / 9 &middot; 安裝 OpenClaw CLI</h2>
-        <p>用 npm 全域安裝 OpenClaw 命令列工具</p>
+        <hgroup>
+          <h2>Step 3 / 9 · 安裝 OpenClaw CLI</h2>
+          <p>~5 分鐘，用 npm 全域安裝 OpenClaw 命令列工具</p>
+        </hgroup>
       </header>
 
       <h3>安裝指令</h3>
       <p>在<strong>系統管理員身分的 PowerShell</strong> 中執行：</p>
-      <pre data-copy><code>npm install -g openclaw</code></pre>
+      <pre data-copy><code>npm install -g openclaw@latest</code></pre>
       <p>安裝過程中會看到一堆文字滾動，這是正常的。等它完成（回到命令提示符號）即可。</p>
 
       <h3>驗證安裝</h3>
@@ -247,8 +263,10 @@ npm --version</code></pre>
     <!-- Step 4: 申請 API Key -->
     <section class="step" data-step="4" hidden>
       <header>
-        <h2>Step 4 / 9 &middot; 申請 API Key</h2>
-        <p>取得讓 AI 模型說話的鑰匙</p>
+        <hgroup>
+          <h2>Step 4 / 9 · 申請 API Key</h2>
+          <p>~10 分鐘，取得讓 AI 模型說話的鑰匙</p>
+        </hgroup>
       </header>
 
       <h3>什麼是 API Key？</h3>
@@ -307,14 +325,16 @@ npm --version</code></pre>
     <!-- Step 5: 初始化設定 -->
     <section class="step" data-step="5" hidden>
       <header>
-        <h2>Step 5 / 9 &middot; 初始化設定</h2>
-        <p>執行 onboard 精靈，完成 API Key 設定與頻道選擇</p>
+        <hgroup>
+          <h2>Step 5 / 9 · 初始化設定</h2>
+          <p>~10 分鐘，執行 onboard 精靈完成 API Key 設定與頻道選擇</p>
+        </hgroup>
       </header>
 
       <div role="alert" class="notice">
         ⚠️ <strong>先備好 Telegram Bot Token！</strong>
         onboard 精靈會在最後一步要求選擇頻道（QuickStart）。
-        建議先跳到 Step 6 建立 Telegram bot、取得 token，再回來執行這個步驟。
+        建議先跳到 Step 6 前半段建立 Telegram bot、取得 Token，再回來執行這個步驟。
       </div>
 
       <h3>執行 onboard 精靈</h3>
@@ -377,8 +397,10 @@ npm --version</code></pre>
     <!-- Step 6: 接通 Telegram -->
     <section class="step" data-step="6" hidden>
       <header>
-        <h2>Step 6 / 9 &middot; 接通 Telegram</h2>
-        <p>建立 Telegram bot，取得 Token，準備在 Step 5 onboard 時填入</p>
+        <hgroup>
+          <h2>Step 6 / 9 · 接通 Telegram</h2>
+          <p>~10 分鐘，建立 Telegram bot 並啟動 gateway</p>
+        </hgroup>
       </header>
 
       <h3>第一部分：建立 Telegram Bot</h3>
@@ -396,19 +418,28 @@ npm --version</code></pre>
         ⚠️ <strong>Token 請小心保管</strong>：不要分享給別人，否則別人可以控制你的 bot。
       </div>
 
-      <h3>第二部分：啟動 Agent</h3>
-      <p>完成 Step 5 onboard 並填入 Token 後，啟動 agent：</p>
-      <pre data-copy><code>openclaw start</code></pre>
+      <h3>第二部分：啟動 Gateway</h3>
+      <p>完成 Step 5 onboard 並填入 Token 後，啟動 gateway（會同時啟動所有已設定的頻道）：</p>
+      <pre data-copy><code>openclaw gateway --port 18789 --verbose</code></pre>
       <p>看到啟動成功的訊息後，打開 Telegram，找到你的 bot（搜尋剛才設定的 username），發一則訊息：</p>
       <pre data-copy><code>/start</code></pre>
       <p><strong>成功標準：</strong>bot 在 10 秒內回覆，內容是 agent 的自我介紹。</p>
+
+      <details>
+        <summary>gateway 指令說明</summary>
+        <p><code>openclaw gateway</code> 是統一的啟動入口，會同時連接所有在 onboard 時設定好的頻道（Telegram、WhatsApp、Discord 等）。不需要為每個平台單獨下指令。</p>
+        <ul>
+          <li><code>--port 18789</code>：gateway 監聽的埠號（預設 18789）</li>
+          <li><code>--verbose</code>：顯示詳細日誌，方便除錯</li>
+        </ul>
+      </details>
 
       <details>
         <summary>遇到問題？</summary>
         <ul>
           <li>
             <strong>Bot 沒有回覆</strong><br>
-            確認 PowerShell 那邊的 <code>openclaw start</code> 還在跑（沒有出現錯誤）。如果有錯誤訊息，複製給講師看。
+            確認 PowerShell 那邊的 <code>openclaw gateway</code> 還在跑（沒有出現錯誤）。如果有錯誤訊息，複製給講師看。
           </li>
           <li>
             <strong>Token invalid 錯誤</strong><br>
@@ -418,6 +449,10 @@ npm --version</code></pre>
             <strong>Bot 不存在或找不到</strong><br>
             Telegram username 搜尋有時候慢，試著直接輸入完整的 <code>@username</code>。
           </li>
+          <li>
+            <strong>Port already in use 錯誤</strong><br>
+            換一個埠號試試：<code>openclaw gateway --port 18790 --verbose</code>
+          </li>
         </ul>
       </details>
     </section>
@@ -425,8 +460,10 @@ npm --version</code></pre>
     <!-- Step 7: 第一次對話 -->
     <section class="step" data-step="7" hidden>
       <header>
-        <h2>Step 7 / 9 &middot; 第一次對話</h2>
-        <p>從 Telegram 跟你的 AI agent 說第一句話</p>
+        <hgroup>
+          <h2>Step 7 / 9 · 第一次對話</h2>
+          <p>~5 分鐘，跟你的 AI agent 說第一句話</p>
+        </hgroup>
       </header>
 
       <h3>從 Telegram 發訊息</h3>
@@ -439,8 +476,9 @@ npm --version</code></pre>
       </p>
 
       <h3>也可以在終端機測試</h3>
-      <pre data-copy><code>openclaw chat</code></pre>
-      <p>按 <kbd>Ctrl + C</kbd> 離開。</p>
+      <p>開啟另一個 PowerShell 視窗（gateway 那個不要關），用 agent 指令直接對話：</p>
+      <pre data-copy><code>openclaw agent --message "你好，請用繁體中文跟我自我介紹" --thinking high</code></pre>
+      <p>這會送出一則訊息給 agent 並顯示回覆。<code>--thinking high</code> 讓 agent 用更多推理能力回答。</p>
 
       <details>
         <summary>遇到問題？</summary>
@@ -459,7 +497,7 @@ npm --version</code></pre>
           </li>
           <li>
             <strong>沒有任何回覆，就一直等</strong><br>
-            確認 <code>openclaw start</code> 還在跑，網路連線正常，再試一次。
+            確認 <code>openclaw gateway --port 18789 --verbose</code> 還在跑，網路連線正常，再試一次。
           </li>
         </ul>
       </details>
@@ -470,8 +508,10 @@ npm --version</code></pre>
     <!-- Step 8: 驗收 -->
     <section class="step" data-step="8" hidden>
       <header>
-        <h2>Step 8 / 9 &middot; 驗收</h2>
-        <p>確認一切都正常運作</p>
+        <hgroup>
+          <h2>Step 8 / 9 · 驗收</h2>
+          <p>~5 分鐘，確認一切都正常運作</p>
+        </hgroup>
       </header>
 
       <h3>驗收清單</h3>
@@ -493,13 +533,19 @@ npm --version</code></pre>
         <li>
           <label>
             <input type="checkbox">
+            <code>openclaw doctor</code> 全部通過（無紅色錯誤）
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
             <code>openclaw config show</code> 顯示完整設定
           </label>
         </li>
         <li>
           <label>
             <input type="checkbox">
-            <code>openclaw chat</code> 能收到 agent 的中文回覆
+            <code>openclaw agent --message "ping"</code> 能收到 agent 回覆
           </label>
         </li>
         <li>
@@ -518,11 +564,15 @@ npm --version</code></pre>
 
       <h3>快速驗證指令</h3>
       <pre data-copy><code>openclaw --version</code></pre>
+      <pre data-copy><code>openclaw doctor</code></pre>
       <pre data-copy><code>openclaw config show</code></pre>
 
       <h3>日後維護</h3>
-      <p>未來如何更新 OpenClaw：</p>
-      <pre data-copy><code>npm update -g openclaw</code></pre>
+      <p>更新 OpenClaw 到最新版：</p>
+      <pre data-copy><code>npm install -g openclaw@latest</code></pre>
+
+      <p>或指定穩定頻道更新：</p>
+      <pre data-copy><code>openclaw update --channel stable</code></pre>
 
       <p>想重新設定 agent：</p>
       <pre data-copy><code>openclaw onboard --install-daemon</code></pre>
@@ -534,14 +584,16 @@ npm --version</code></pre>
         <li>OpenRouter 文件 — 查詢可用模型與費用</li>
       </ul>
 
-      <p>🎉 <strong>恭喜完成安裝！</strong>你的 AI agent 已經在線上了。繼續看 Step 9 預覽更多可能性。</p>
+      <p><strong>恭喜完成安裝！</strong>你的 AI agent 已經在線上了。繼續看 Step 9 預覽更多可能性。</p>
     </section>
 
     <!-- Step 9: 加碼 -->
     <section class="step" data-step="9" hidden>
       <header>
-        <h2>Step 9 / 9 &middot; 加碼</h2>
-        <p>你已經建好地基，現在來看看蓋得多高</p>
+        <hgroup>
+          <h2>Step 9 / 9 · 加碼</h2>
+          <p>~5 分鐘，你已經建好地基，現在來看看蓋得多高</p>
+        </hgroup>
       </header>
 
       <h3>Skills 系統</h3>
@@ -553,31 +605,50 @@ npm --version</code></pre>
       <pre data-copy><code>openclaw skills list</code></pre>
 
       <h3>接通更多平台</h3>
-      <p>同一個 agent 可以同時連接多個平台：</p>
+      <p>
+        OpenClaw 的 gateway 是統一入口：在 onboard 時設定好各平台，然後用一條指令啟動全部。
+        不需要為每個平台單獨啟動。
+      </p>
+
+      <h4>設定新平台的流程</h4>
+      <ol>
+        <li>重新執行 onboard 精靈，選擇要新增的頻道：</li>
+      </ol>
+      <pre data-copy><code>openclaw onboard --install-daemon</code></pre>
+      <ol start="2">
+        <li>或使用 pairing 指令配對（部分平台支援）：</li>
+      </ol>
+      <pre data-copy><code>openclaw pairing approve telegram &lt;code&gt;</code></pre>
+      <ol start="3">
+        <li>啟動 gateway，所有已設定的平台會一起上線：</li>
+      </ol>
+      <pre data-copy><code>openclaw gateway --port 18789 --verbose</code></pre>
+
+      <h4>支援的平台</h4>
       <figure>
         <table>
           <thead>
             <tr>
+              <th>類別</th>
               <th>平台</th>
-              <th>指令</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Discord</td>
-              <td><code>openclaw gateway discord --token BOT_TOKEN</code></td>
+              <td>即時通訊</td>
+              <td>WhatsApp、Telegram、Signal、iMessage、LINE、WeChat、QQ、Zalo</td>
             </tr>
             <tr>
-              <td>WhatsApp</td>
-              <td><code>openclaw gateway whatsapp</code>（QR Code 配對）</td>
+              <td>團隊協作</td>
+              <td>Slack、Discord、Microsoft Teams、Google Chat、Mattermost、Matrix、Feishu</td>
             </tr>
             <tr>
-              <td>LINE</td>
-              <td><code>openclaw gateway line --token TOKEN</code></td>
+              <td>其他</td>
+              <td>IRC、Nostr、Nextcloud Talk、Synapse Chat、Tlon、Twitch、WebChat</td>
             </tr>
             <tr>
-              <td>Slack</td>
-              <td><code>openclaw gateway slack --token TOKEN</code></td>
+              <td>原生 App</td>
+              <td>macOS、iOS、Android</td>
             </tr>
           </tbody>
         </table>
@@ -594,6 +665,11 @@ npm --version</code></pre>
       <p>讓 agent 自動執行週期性任務：</p>
       <pre data-copy><code>openclaw schedule add --cron "0 8 * * *" --task "發送今日天氣報告到 Telegram"</code></pre>
 
+      <h3>診斷與維護</h3>
+      <p>遇到問題時，先跑診斷指令：</p>
+      <pre data-copy><code>openclaw doctor</code></pre>
+      <p>它會檢查所有元件的健康狀態，並告訴你哪邊需要修正。</p>
+
       <h3>多 Agent 協作</h3>
       <p>
         進階玩法：建立多個有不同職責的 agent，讓它們互相合作。
@@ -606,7 +682,7 @@ npm --version</code></pre>
         <li><strong>玩一週</strong>：每天想一個用 agent 幫你做的事，看它能做到什麼程度</li>
         <li><strong>建第一個 Skill</strong>：把你常做的重複性工作自動化</li>
         <li><strong>加入社群</strong>：在 GitHub Discussions 分享你的用法、看別人的 Skill</li>
-        <li><strong>接通第二個平台</strong>：試試 Discord 或 WhatsApp</li>
+        <li><strong>接通第二個平台</strong>：試試 WhatsApp 或 Discord</li>
       </ol>
 
       <hr>
@@ -619,15 +695,15 @@ npm --version</code></pre>
 
   </main>
 
-  <nav id="step-nav">
-    <button id="prev-btn" disabled>上一步</button>
-    <button id="next-btn">下一步</button>
+  <nav id="step-nav" class="container">
+    <button id="prev-btn" type="button">← 上一步</button>
+    <button id="next-btn" type="button" class="primary">下一步 →</button>
   </nav>
 
-  <footer>
-    <p>OpenClaw Windows 安裝課程 &mdash; MIT License</p>
+  <footer class="container">
+    <small>對應 openclaw（待 smoke test 確認）· <a href="https://github.com/Lewsiafat/openclaw-lesson">GitHub</a></small>
   </footer>
 
-  <script src="wizard.js"></script>
+  <script src="wizard.js" defer></script>
 </body>
 </html>
