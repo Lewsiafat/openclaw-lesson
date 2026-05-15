@@ -333,58 +333,84 @@ npm --version</code></pre>
 
       <div role="alert" class="notice">
         ⚠️ <strong>先備好 Telegram Bot Token！</strong>
-        onboard 精靈會在最後一步要求選擇頻道（QuickStart）。
-        建議先跳到 Step 6 前半段建立 Telegram bot、取得 Token，再回來執行這個步驟。
+        精靈在「Select channel」步驟會要你貼入 Telegram Bot Token。
+        建議先跳到 Step 6 第一部分建立 Telegram bot、取得 Token，再回來執行這個步驟。
       </div>
 
       <h3>執行 onboard 精靈</h3>
       <p>在<strong>系統管理員身分的 PowerShell</strong> 中執行：</p>
       <pre data-copy><code>openclaw onboard --install-daemon</code></pre>
-      <p>精靈會依序問你以下問題：</p>
+      <p>精靈會依序出現以下 7 個畫面，照表操作：</p>
 
       <figure>
         <table>
           <thead>
             <tr>
-              <th>提示訊息</th>
-              <th>說明與建議填法</th>
+              <th>#</th>
+              <th>精靈畫面</th>
+              <th>操作</th>
             </tr>
           </thead>
           <tbody>
             <tr>
+              <td>1</td>
               <td><em>I understand this is personal-by-default and shared/multi-user use requires lock-down. Continue?</em></td>
-              <td>預設是個人使用模式（只有你能控制 agent）。輸入 <code>y</code> 確認繼續。</td>
+              <td>按 Enter 確認繼續</td>
             </tr>
             <tr>
-              <td>Model/auth provider</td>
-              <td>選 <code>openrouter</code>（或你在 Step 4 申請的那個）</td>
+              <td>2</td>
+              <td><strong>Setup mode</strong>：QuickStart (recommended) / Manual setup / Import from Claude</td>
+              <td>選 <strong>QuickStart (recommended)</strong>，Enter</td>
             </tr>
             <tr>
-              <td>API Key?</td>
-              <td>貼上 Step 4 複製的 Key</td>
+              <td>3</td>
+              <td><strong>Select channel</strong>：選擇要接通的平台</td>
+              <td>選 <strong>telegram</strong>，貼上 Step 6 取得的 Bot Token，Enter</td>
             </tr>
             <tr>
-              <td>Select channel (QuickStart)</td>
-              <td>選 <code>telegram</code>，貼上 Step 6 取得的 Bot Token</td>
+              <td>4</td>
+              <td><strong>Search provider</strong>（AI 模型供應商）</td>
+              <td>選 <strong>skip now</strong>（之後用 <code>openclaw configure</code> 設定）</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td><strong>Configure skills now? (recommended)</strong></td>
+              <td>選 <strong>No</strong></td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td><strong>Enable hooks?</strong></td>
+              <td>選 <strong>Skip for now</strong></td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td><strong>How do you want to hatch your agent?</strong></td>
+              <td>選 <strong>Hatch in Terminal (recommended)</strong></td>
             </tr>
           </tbody>
         </table>
       </figure>
 
-      <h3>確認設定已儲存</h3>
-      <pre data-copy><code>openclaw config show</code></pre>
-      <p>應該看到 provider、API Key（部分遮蔽）與頻道設定。</p>
+      <p>選完「Hatch in Terminal」後，<strong>gateway 會自動啟動，TUI 介面隨即開啟</strong>。你的 agent 已經在線上了。</p>
+
+      <details>
+        <summary>「Search provider」跳過了，AI 怎麼辦？</summary>
+        <p>跳過 provider 代表 onboard 結束後 agent 還沒有 AI 模型可以呼叫。
+        TUI 開啟後，在 TUI 裡執行 <code>/configure</code> 或在另一個視窗跑：</p>
+        <pre data-copy><code>openclaw configure</code></pre>
+        <p>選擇 <strong>openrouter</strong>，貼入你在 Step 4 取得的 API Key，儲存後 agent 就能跟 AI 說話。</p>
+      </details>
 
       <details>
         <summary>遇到問題？</summary>
         <ul>
           <li>
             <strong>onboard 沒有互動，直接跳出</strong><br>
-            試試重新執行 <code>openclaw onboard --install-daemon</code>，或以系統管理員身分開啟新的 PowerShell 再試。
+            以系統管理員身分重新開啟 PowerShell，再跑一次 <code>openclaw onboard --install-daemon</code>。
           </li>
           <li>
-            <strong>API Key 格式錯誤</strong><br>
-            確認沒有多餘的空格。OpenRouter 的 Key 開頭是 <code>sk-or-v1-</code>，Anthropic 是 <code>sk-ant-</code>，OpenAI 是 <code>sk-</code>。
+            <strong>TUI 沒有出現，停在 Step 7</strong><br>
+            確認有選「Hatch in Terminal」而不是其他選項。重新執行 onboard 再試。
           </li>
           <li>
             <strong>想手動編輯設定檔</strong><br>
@@ -399,7 +425,7 @@ npm --version</code></pre>
       <header>
         <hgroup>
           <h2>Step 6 / 9 · 接通 Telegram</h2>
-          <p>~10 分鐘，建立 Telegram bot 並啟動 gateway</p>
+          <p>~10 分鐘，建立 Telegram bot 並驗證連線</p>
         </hgroup>
       </header>
 
@@ -418,40 +444,35 @@ npm --version</code></pre>
         ⚠️ <strong>Token 請小心保管</strong>：不要分享給別人，否則別人可以控制你的 bot。
       </div>
 
-      <h3>第二部分：啟動 Gateway</h3>
-      <p>完成 Step 5 onboard 並填入 Token 後，啟動 gateway（會同時啟動所有已設定的頻道）：</p>
-      <pre data-copy><code>openclaw gateway --port 18789 --verbose</code></pre>
-      <p>看到啟動成功的訊息後，打開 Telegram，找到你的 bot（搜尋剛才設定的 username），發一則訊息：</p>
+      <h3>第二部分：驗證 Telegram 連線</h3>
+      <p>完成 Step 5 onboard 後，TUI 已自動開啟、gateway 已在背景運作。現在去 Telegram 確認連線：</p>
+      <ol>
+        <li>打開 Telegram，搜尋你剛才建立的 bot username（例如：<code>@myopenclaw_bot</code>）</li>
+        <li>點進去，發一則訊息：</li>
+      </ol>
       <pre data-copy><code>/start</code></pre>
       <p><strong>成功標準：</strong>bot 在 10 秒內回覆，內容是 agent 的自我介紹。</p>
-
-      <details>
-        <summary>gateway 指令說明</summary>
-        <p><code>openclaw gateway</code> 是統一的啟動入口，會同時連接所有在 onboard 時設定好的頻道（Telegram、WhatsApp、Discord 等）。不需要為每個平台單獨下指令。</p>
-        <ul>
-          <li><code>--port 18789</code>：gateway 監聽的埠號（預設 18789）</li>
-          <li><code>--verbose</code>：顯示詳細日誌，方便除錯</li>
-        </ul>
-      </details>
 
       <details>
         <summary>遇到問題？</summary>
         <ul>
           <li>
             <strong>Bot 沒有回覆</strong><br>
-            確認 PowerShell 那邊的 <code>openclaw gateway</code> 還在跑（沒有出現錯誤）。如果有錯誤訊息，複製給講師看。
+            確認 Step 5 的 TUI 還在跑（那個 PowerShell 視窗沒有關掉）。TUI 就是 gateway——關掉視窗等於關掉 agent。
           </li>
           <li>
             <strong>Token invalid 錯誤</strong><br>
-            回去 BotFather 點選 /mybots → 你的 bot → API Token，重新複製完整的 token。注意不要多複製空格。
+            回去 BotFather，點 /mybots → 你的 bot → API Token，重新複製完整的 token，再跑一次 <code>openclaw onboard --install-daemon</code> 重新設定。
           </li>
           <li>
-            <strong>Bot 不存在或找不到</strong><br>
-            Telegram username 搜尋有時候慢，試著直接輸入完整的 <code>@username</code>。
+            <strong>Bot 找不到</strong><br>
+            Telegram 搜尋有時候慢，試著直接輸入完整的 <code>@username</code>。
           </li>
           <li>
-            <strong>Port already in use 錯誤</strong><br>
-            換一個埠號試試：<code>openclaw gateway --port 18790 --verbose</code>
+            <strong>TUI 已關掉，想重新啟動 agent</strong><br>
+            重新開啟 PowerShell，執行：
+            <pre data-copy><code>openclaw gateway --port 18789 --verbose</code></pre>
+            這樣可以手動啟動 gateway，不需要重跑 onboard 精靈。
           </li>
         </ul>
       </details>
@@ -497,7 +518,7 @@ npm --version</code></pre>
           </li>
           <li>
             <strong>沒有任何回覆，就一直等</strong><br>
-            確認 <code>openclaw gateway --port 18789 --verbose</code> 還在跑，網路連線正常，再試一次。
+            確認 Step 5 的 TUI 視窗還在跑（或手動執行 <code>openclaw gateway --port 18789 --verbose</code>），網路連線正常，再試一次。
           </li>
         </ul>
       </details>
